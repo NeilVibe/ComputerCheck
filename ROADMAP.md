@@ -21,32 +21,34 @@
 ## 🎯 IMMEDIATE PRIORITIES
 
 ### Security Enhancements
-- 🔲 **Real-time monitoring** - Background service for continuous monitoring
-- 🔲 **Automated reporting** - Daily/weekly security summary emails
+- 🔲 **Manual scan modes** - User-initiated comprehensive scans
+  - **DEEP SCAN** - Full security audit (all tools, 7-day history)
+  - **BASIC SCAN** - Essential checks (critical events, processes)
+  - **NETWORK SCAN** - Connection analysis and monitoring
+  - **HARDWARE SCAN** - USB devices, system files, registry
+- 🔲 **Custom scan profiles** - Save preferred scan combinations
 - 🔲 **Threat intelligence** - Integration with external threat feeds
-- 🔲 **Custom alerts** - Configurable notifications for specific events
 
 ### User Experience
 - 🔲 **GUI interface** - Windows Forms or PowerShell GUI
 - 🔲 **One-click installer** - Automated setup script
 - 🔲 **Configuration files** - Customizable settings and preferences
-- 🔲 **Update mechanism** - Auto-update from GitHub releases
+- 🔲 **Update mechanism** - Manual update from GitHub releases
+- 🔲 **Scan profiles** - DEEP, BASIC, NETWORK, HARDWARE scan modes
 
 ## 🚀 FUTURE FEATURES
 
-### Advanced Security
-- 🔲 **Malware sandboxing** - Isolated analysis environment
-- 🔲 **Network traffic analysis** - Deep packet inspection
-- 🔲 **Registry monitoring** - Real-time registry change detection
-- 🔲 **File integrity monitoring** - HIDS functionality
-- 🔲 **Log aggregation** - Centralized logging from multiple sources
+### Advanced Security (Manual Operation)
+- 🔲 **Malware sandboxing** - User-initiated isolated analysis
+- 🔲 **Network traffic analysis** - On-demand deep packet inspection
+- 🔲 **File integrity monitoring** - User-triggered HIDS functionality
+- 🔲 **Log aggregation** - Manual export to analysis tools
 
-### Automation & Integration
-- 🔲 **API endpoints** - REST API for external integrations
-- 🔲 **SIEM integration** - Export to Splunk, ELK, etc.
+### Integration (User-Controlled)
+- 🔲 **Export formats** - CSV, JSON, XML report exports
 - 🔲 **PowerShell modules** - Installable PS modules
-- 🔲 **Group Policy templates** - Enterprise deployment
-- 🔲 **Cloud sync** - Backup configs and reports to cloud
+- 🔲 **Manual reporting** - Generate reports on-demand
+- 🔲 **Backup/restore** - User-initiated config backup
 
 ### Reporting & Analytics
 - 🔲 **HTML dashboards** - Web-based security dashboard
@@ -77,10 +79,31 @@
 - **Security Events**: No dangerous events detected
 - **Error Rate**: 0% (all scripts working)
 
-### Immediate Next Steps:
-1. Commit dangerous-event-ids.ps1 fixes
-2. Add real-time monitoring capability
-3. Create configuration file system
-4. Build automated installer
+## 🔥 IMMEDIATE NEXT STEPS (Current Session)
+
+### New Security Tools to Add:
+1. ✅ **registry-startup-check.ps1** → Security class (detect malware autostart) - COMPLETED
+2. **system-file-monitor.ps1** → Security class (system tampering detection)  
+3. **usb-device-monitor.ps1** → Monitoring class (physical security)
+4. **Update dangerous-event-ids.ps1** → Add privilege escalation events (4728, 4732, 4756)
+5. **Update MegaManager.ps1** → Add new tool options
+
+### Open Source Integration:
+- **No external installs required** - Uses built-in Windows PowerShell
+- **Reference lists** - YARA rules, IOC lists, Sigma rules (just text files)
+- **Native detection** - Registry scanning, file monitoring, USB logging
+- **Optional upgrades** - Sysmon, YARA executable (can add later for more power)
+- **Current approach** - PowerShell-only is sufficient for personal health checking
+
+### Project Status After Additions:
+- **Security Class**: 6 tools (was 4)
+- **Monitoring Class**: 5 tools (was 4) 
+- **Total Tools**: 16 (was 12)
+- **Coverage**: Complete small business security
+
+### Following Sessions:
+1. **Scan mode system** - DEEP/BASIC/NETWORK/HARDWARE profiles
+2. **GUI interface** - Easy scan selection and results viewing
+3. **Manual installer** - One-click setup (user-initiated)
 
 *Last Updated: July 19, 2025*
