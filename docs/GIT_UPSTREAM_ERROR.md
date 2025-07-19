@@ -60,8 +60,17 @@ chmod 777 .git/config
 git push --set-upstream origin master
 ```
 
-## Best Practice:
-Just use explicit branch names in commands to avoid tracking issues:
+## FINAL SOLUTION:
+The upstream tracking keeps getting lost due to WSL permission issues with `.git/config.lock`.
+
+**Best Practice**: Always use explicit commands:
 ```bash
-git push origin master  # or main
+# Instead of: git push
+# Always use:
+git push origin main
+
+# For commits and push:
+git add . && git commit -m "message" && git push origin main
 ```
+
+**This avoids upstream tracking issues completely!**
