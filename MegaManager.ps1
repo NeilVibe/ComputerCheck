@@ -83,10 +83,12 @@ EXAMPLES:
         
         if ($List) {
             Write-Host "Available security tools:" -ForegroundColor Yellow
-            Write-Host "  comprehensive  - Full system security scan"
-            Write-Host "  deep-process   - Advanced process analysis"
-            Write-Host "  safe-events    - Security event monitoring"
-            Write-Host "  original       - Original security checker"
+            Write-Host "  comprehensive    - Full system security scan"
+            Write-Host "  deep-process     - Advanced process analysis"
+            Write-Host "  safe-events      - Security event monitoring"
+            Write-Host "  registry-startup - Registry malware detection"
+            Write-Host "  system-files     - System file integrity check"
+            Write-Host "  original         - Original security checker"
             return
         }
         
@@ -100,12 +102,18 @@ EXAMPLES:
             "safe-events" { 
                 Run-CategoryScript "security" "safe-event-monitor.ps1" $Action
             }
+            "registry-startup" { 
+                Run-CategoryScript "security" "registry-startup-check.ps1" $Action
+            }
+            "system-files" { 
+                Run-CategoryScript "security" "system-file-monitor.ps1" $Action
+            }
             "original" { 
                 Run-CategoryScript "security" "check_security.ps1" $Action
             }
             "" {
                 Write-Host "Available security tools:" -ForegroundColor Yellow
-                Write-Host "  comprehensive, deep-process, safe-events, original"
+                Write-Host "  comprehensive, deep-process, safe-events, registry-startup, system-files, original"
                 Write-Host "Example: .\MegaManager.ps1 security comprehensive"
             }
             default {
@@ -152,6 +160,7 @@ EXAMPLES:
             Write-Host "  powershell-simple  - Simple PowerShell event check"
             Write-Host "  event-levels       - Event level analysis"
             Write-Host "  dangerous-events   - Critical security events"
+            Write-Host "  usb-devices        - USB device security monitoring"
             return
         }
         
@@ -168,9 +177,12 @@ EXAMPLES:
             "dangerous-events" { 
                 Run-CategoryScript "monitoring" "dangerous-event-ids.ps1" $Action
             }
+            "usb-devices" { 
+                Run-CategoryScript "monitoring" "usb-device-monitor.ps1" $Action
+            }
             "" {
                 Write-Host "Available monitoring tools:" -ForegroundColor Yellow
-                Write-Host "  powershell-events, powershell-simple, event-levels, dangerous-events"
+                Write-Host "  powershell-events, powershell-simple, event-levels, dangerous-events, usb-devices"
                 Write-Host "Example: .\MegaManager.ps1 monitoring powershell-events"
             }
             default {
@@ -215,6 +227,8 @@ EXAMPLES:
         Test-ScriptExists "$ScriptPath\categories\security\comprehensive-security-check.ps1"
         Test-ScriptExists "$ScriptPath\categories\security\deep-process-check.ps1"
         Test-ScriptExists "$ScriptPath\categories\security\safe-event-monitor.ps1"
+        Test-ScriptExists "$ScriptPath\categories\security\registry-startup-check.ps1"
+        Test-ScriptExists "$ScriptPath\categories\security\system-file-monitor.ps1"
         Test-ScriptExists "$ScriptPath\categories\security\check_security.ps1"
         
         Write-Host "`nPERFORMANCE TOOLS:" -ForegroundColor Green
@@ -226,6 +240,7 @@ EXAMPLES:
         Test-ScriptExists "$ScriptPath\categories\monitoring\check-4104-simple.ps1"
         Test-ScriptExists "$ScriptPath\categories\monitoring\check-event-levels.ps1"
         Test-ScriptExists "$ScriptPath\categories\monitoring\dangerous-event-ids.ps1"
+        Test-ScriptExists "$ScriptPath\categories\monitoring\usb-device-monitor.ps1"
         
         Write-Host "`nUTILITY TOOLS:" -ForegroundColor Magenta
         Test-ScriptExists "$ScriptPath\categories\utilities\test-admin.ps1"
@@ -239,20 +254,20 @@ EXAMPLES:
         Write-Host "`n📋 ALL AVAILABLE TOOLS" -ForegroundColor White
         Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         
-        Write-Host "`nSECURITY - 4 tools:" -ForegroundColor Red
-        Write-Host "   comprehensive, deep-process, safe-events, original"
+        Write-Host "`nSECURITY - 6 tools:" -ForegroundColor Red
+        Write-Host "   comprehensive, deep-process, safe-events, registry-startup, system-files, original"
         
         Write-Host "`nPERFORMANCE - 2 tools:" -ForegroundColor Green
         Write-Host "   memory, vmmem"
         
-        Write-Host "`nMONITORING - 4 tools:" -ForegroundColor Blue
-        Write-Host "   powershell-events, powershell-simple, event-levels, dangerous-events"
+        Write-Host "`nMONITORING - 5 tools:" -ForegroundColor Blue
+        Write-Host "   powershell-events, powershell-simple, event-levels, dangerous-events, usb-devices"
         
         Write-Host "`nUTILITIES - 2 tools:" -ForegroundColor Magenta
         Write-Host "   test-admin, security-mgr"
         
         Write-Host "`n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        Write-Host "Total: 12 organized tools" -ForegroundColor Cyan
+        Write-Host "Total: 15 organized tools" -ForegroundColor Cyan
     }
     
     default {
