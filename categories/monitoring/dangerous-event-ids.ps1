@@ -33,18 +33,19 @@ Write-Host ""
 Write-Host "=== CHECKING YOUR SYSTEM FOR DANGEROUS EVENT IDs ===" -ForegroundColor Green
 
 $dangerousEvents = @(
-    @{ID=4625; Name="Failed Logon"; Risk="CRITICAL"},
-    @{ID=4719; Name="Audit Policy Changed"; Risk="CRITICAL"},
-    @{ID=1116; Name="Malware Detected"; Risk="CRITICAL"},
-    @{ID=4720; Name="User Created"; Risk="HIGH"},
-    @{ID=4726; Name="User Deleted"; Risk="HIGH"},
-    @{ID=7045; Name="Service Installed"; Risk="HIGH"},
-    @{ID=4698; Name="Task Created"; Risk="HIGH"},
-    @{ID=6008; Name="Unexpected Shutdown"; Risk="MEDIUM"}
+    @{ID=4625; Name="Failed Logon"; Risk="CRITICAL"; LogName="Security"},
+    @{ID=4719; Name="Audit Policy Changed"; Risk="CRITICAL"; LogName="Security"},
+    @{ID=1116; Name="Malware Detected"; Risk="CRITICAL"; LogName="Microsoft-Windows-Windows Defender/Operational"},
+    @{ID=4720; Name="User Created"; Risk="HIGH"; LogName="Security"},
+    @{ID=4726; Name="User Deleted"; Risk="HIGH"; LogName="Security"},
+    @{ID=7045; Name="Service Installed"; Risk="HIGH"; LogName="System"},
+    @{ID=4698; Name="Task Created"; Risk="HIGH"; LogName="Security"},
+    @{ID=6008; Name="Unexpected Shutdown"; Risk="MEDIUM"; LogName="System"}
 )
 
 foreach ($event in $dangerousEvents) {
     $found = Get-WinEvent -FilterHashtable @{
+        LogName=$event.LogName
         ID=$event.ID
         StartTime=$startTime
     } -ErrorAction SilentlyContinue

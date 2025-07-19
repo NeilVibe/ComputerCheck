@@ -43,7 +43,8 @@
       "Bash(gh repo view:*)",
       "Bash(git branch:*)",
       "Bash(sudo git branch:*)",
-      "Bash(sudo chmod:*)"
+      "Bash(sudo chmod:*)",
+      "Bash(/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\Users\\MYCOM\\Desktop\\CheckComputer\\MegaManager.ps1\" monitoring dangerous-events)"
     ],
     "deny": []
   }
