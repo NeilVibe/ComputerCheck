@@ -29,7 +29,14 @@
       "Bash(/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\Users\\MYCOM\\Desktop\\CheckComputer\\SecurityManager.ps1\" malware Kings)",
       "Bash(sudo git init:*)",
       "Bash(git remote add:*)",
-      "Bash(sudo git add:*)"
+      "Bash(sudo git add:*)",
+      "Bash(sudo git commit -m \"Complete organized security toolkit with MegaManager\")",
+      "Bash(sudo git push -u origin master)",
+      "Bash(gh repo sync:*)",
+      "Bash(sudo git remote set-url origin https://github.com/NeilVibe/ComputerCheck.git)",
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
