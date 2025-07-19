@@ -39,7 +39,11 @@
       "Bash(git commit:*)",
       "Bash(ls:*)",
       "Bash(/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\Users\\MYCOM\\Desktop\\CheckComputer\\MegaManager.ps1\" performance vmmem)",
-      "Bash(/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\Users\\MYCOM\\Desktop\\CheckComputer\\SecurityManager.ps1\" memory)"
+      "Bash(/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\Users\\MYCOM\\Desktop\\CheckComputer\\SecurityManager.ps1\" memory)",
+      "Bash(gh repo view:*)",
+      "Bash(git branch:*)",
+      "Bash(sudo git branch:*)",
+      "Bash(sudo chmod:*)"
     ],
     "deny": []
   }
