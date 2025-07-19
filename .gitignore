@@ -1,0 +1,35 @@
+# Temporary files
+*.tmp
+temp_*
+.temp/
+
+# PowerShell execution logs
+*.log
+
+# Windows thumbnail cache
+Thumbs.db
+ehthumbs.db
+
+# System files
+.DS_Store
+Desktop.ini
+
+# Claude settings (local only)
+.claude/settings.local.json
+
+# Git credentials
+.git/config.lock
+
+# Security scan results (personal data)
+scan_results_*
+personal_scan_*
+
+# Backup files
+*.bak
+*.backup
+
+# Editor temp files
+*~
+.vscode/
+*.swp
+*.swo

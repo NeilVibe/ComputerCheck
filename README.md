@@ -83,10 +83,14 @@ The checkup will provide:
 4. **Document changes** made to the system
 5. **Run verification** after fixes
 
-## Additional Tools Available
+## Additional Resources
 
+- **INSTALL.md**: Quick installation guide
+- **USAGE_GUIDE.md**: Detailed usage instructions  
+- **FINAL_PROJECT_STATUS.md**: Complete project overview
 - **computer_security_report.md**: Historical security incident documentation
-- **query**: Database for tracking system changes over time
+- **docs/**: Detailed documentation and lessons learned
+- **archive/**: Old scripts and specialized tools
 
 ## Best Practices
 
