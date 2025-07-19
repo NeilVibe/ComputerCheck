@@ -38,6 +38,9 @@ $dangerousEvents = @(
     @{ID=1116; Name="Malware Detected"; Risk="CRITICAL"; LogName="Microsoft-Windows-Windows Defender/Operational"},
     @{ID=4720; Name="User Created"; Risk="HIGH"; LogName="Security"},
     @{ID=4726; Name="User Deleted"; Risk="HIGH"; LogName="Security"},
+    @{ID=4728; Name="User Added to Security Group"; Risk="HIGH"; LogName="Security"},
+    @{ID=4732; Name="User Added to Local Group"; Risk="HIGH"; LogName="Security"},
+    @{ID=4756; Name="User Added to Universal Group"; Risk="HIGH"; LogName="Security"},
     @{ID=7045; Name="Service Installed"; Risk="HIGH"; LogName="System"},
     @{ID=4698; Name="Task Created"; Risk="HIGH"; LogName="Security"},
     @{ID=6008; Name="Unexpected Shutdown"; Risk="MEDIUM"; LogName="System"}
