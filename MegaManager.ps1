@@ -87,6 +87,7 @@ EXAMPLES:
             Write-Host "  deep-process     - Advanced process analysis"
             Write-Host "  safe-events      - Security event monitoring"
             Write-Host "  registry-startup - Registry malware detection"
+            Write-Host "  registry-audit   - Comprehensive registry health audit"
             Write-Host "  system-files     - System file integrity check"
             Write-Host "  original         - Original security checker"
             return
@@ -105,6 +106,9 @@ EXAMPLES:
             "registry-startup" { 
                 Run-CategoryScript "security" "registry-startup-check.ps1" $Action
             }
+            "registry-audit" { 
+                Run-CategoryScript "security" "registry-comprehensive-audit.ps1" $Action
+            }
             "system-files" { 
                 Run-CategoryScript "security" "system-file-monitor.ps1" $Action
             }
@@ -113,7 +117,7 @@ EXAMPLES:
             }
             "" {
                 Write-Host "Available security tools:" -ForegroundColor Yellow
-                Write-Host "  comprehensive, deep-process, safe-events, registry-startup, system-files, original"
+                Write-Host "  comprehensive, deep-process, safe-events, registry-startup, registry-audit, system-files, original"
                 Write-Host "Example: .\MegaManager.ps1 security comprehensive"
             }
             default {
@@ -254,8 +258,8 @@ EXAMPLES:
         Write-Host "`n📋 ALL AVAILABLE TOOLS" -ForegroundColor White
         Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         
-        Write-Host "`nSECURITY - 6 tools:" -ForegroundColor Red
-        Write-Host "   comprehensive, deep-process, safe-events, registry-startup, system-files, original"
+        Write-Host "`nSECURITY - 7 tools:" -ForegroundColor Red
+        Write-Host "   comprehensive, deep-process, safe-events, registry-startup, registry-audit, system-files, original"
         
         Write-Host "`nPERFORMANCE - 2 tools:" -ForegroundColor Green
         Write-Host "   memory, vmmem"
@@ -267,7 +271,7 @@ EXAMPLES:
         Write-Host "   test-admin, security-mgr"
         
         Write-Host "`n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        Write-Host "Total: 15 organized tools" -ForegroundColor Cyan
+        Write-Host "Total: 16 organized tools" -ForegroundColor Cyan
     }
     
     default {

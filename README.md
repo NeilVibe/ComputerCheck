@@ -26,7 +26,21 @@ This project provides comprehensive tools for checking your computer's overall h
 
 ## How to Use
 
-### 🚀 NEW: Security Manager v2.0 (Recommended)
+### 🚀 NEW: Comprehensive Registry Analyzer (Latest Addition)
+
+**Full registry health audit and analysis tool** - detect startup bloatware, security issues, and system problems!
+
+#### Quick Registry Analysis:
+```bash
+# From WSL/Linux Terminal:
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\MYCOM\Desktop\CheckComputer\MegaManager.ps1" security registry-audit
+
+# Or from PowerShell:
+.\MegaManager.ps1 security registry-audit
+.\MegaManager.ps1 security registry-audit -Export  # Save detailed report
+```
+
+### 🚀 Security Manager v2.0 (Also Recommended)
 
 Built with lessons learned - no more syntax errors or slow scans!
 
@@ -62,11 +76,11 @@ Built with lessons learned - no more syntax errors or slow scans!
 
 ### Recommended Checkup Schedule
 
-- **Weekly**: Quick security scan
-- **Monthly**: Full system checkup
+- **Weekly**: Quick security scan + registry audit
+- **Monthly**: Full system checkup + comprehensive registry analysis
 - **After Issues**: When experiencing slowdowns or crashes
-- **Post-Installation**: After installing major software
-- **Quarterly**: Deep system analysis
+- **Post-Installation**: After installing major software (check startup changes)
+- **Quarterly**: Deep system analysis + registry cleanup
 
 ## Understanding Results
 
@@ -74,6 +88,13 @@ The checkup will provide:
 - **Green/OK**: System component is healthy
 - **Yellow/Warning**: Minor issues that should be monitored
 - **Red/Critical**: Immediate attention required
+
+### Registry Analysis Results:
+- **[SAFE]**: Known good software (Microsoft, NVIDIA, etc.)
+- **[UNKNOWN]**: Needs review (could be legitimate software)
+- **[SUSPICIOUS]**: High risk entries requiring investigation
+- **Orphaned Keys**: >20 suggests cleanup needed
+- **Critical Issues**: >0 requires immediate security investigation
 
 ## What to Do After Checkup
 
@@ -102,4 +123,5 @@ The checkup will provide:
 
 ---
 
-*Computer Health Checkup Tool - Last updated: January 2025* 
+*Computer Health Checkup Tool - Last updated: January 2025*  
+**🆕 Latest Addition: Comprehensive Registry Analyzer - Full system registry health audit** 
