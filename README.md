@@ -121,6 +121,25 @@ The checkup will provide:
 4. **Keep logs** of all checkups for trend analysis
 5. **Act on findings** promptly to prevent issues
 
+## ⚠️ IMPORTANT: File Permissions (WSL/Linux Users)
+
+**If using WSL or Linux terminal, you MUST fix file permissions:**
+
+```bash
+# Fix all permissions (run this first!)
+sudo chmod -R 755 /mnt/c/Users/MYCOM/Desktop/CheckComputer
+sudo chmod +x /mnt/c/Users/MYCOM/Desktop/CheckComputer/*.ps1
+sudo chmod +x /mnt/c/Users/MYCOM/Desktop/CheckComputer/categories/*/*.ps1
+
+# If git push fails:
+sudo chmod 644 /mnt/c/Users/MYCOM/Desktop/CheckComputer/.git/config
+```
+
+**Signs you need to run chmod:**
+- "Permission denied" when running scripts
+- "Operation not permitted" errors  
+- Git push fails with config.lock errors
+
 ---
 
 *Computer Health Checkup Tool - Last updated: January 2025*  

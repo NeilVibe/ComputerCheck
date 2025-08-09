@@ -262,3 +262,16 @@ rm [bloatware-files]
 - **Delete test/broken scripts** before committing
 - **Use clear naming** - avoid version suffixes in final scripts
 - **Test integration** before considering complete
+- **ALWAYS chmod new files** before committing (WSL/Linux essential!)
+
+### CHMOD Requirements in Anti-ClaudeBloat:
+```bash
+# Essential commands after any file creation/modification:
+sudo chmod -R 755 /mnt/c/Users/MYCOM/Desktop/CheckComputer
+sudo chmod +x /mnt/c/Users/MYCOM/Desktop/CheckComputer/categories/*/*.ps1
+
+# Before git operations:
+sudo chmod 644 /mnt/c/Users/MYCOM/Desktop/CheckComputer/.git/config
+```
+
+**⚠️ CRITICAL**: CHMOD failures are a major source of "broken" projects. Always fix permissions as part of development workflow!

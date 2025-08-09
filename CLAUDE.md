@@ -88,6 +88,39 @@ Stop-Service -Name "ServiceName" -Force; Set-Service -Name "ServiceName" -Startu
 - **Run as Administrator** when needed
 - **Check project README.md** for full documentation
 
+## CRITICAL: CHMOD Requirements
+**⚠️ CHMOD IS ESSENTIAL FOR WSL/Linux COMPATIBILITY ⚠️**
+
+### When CHMOD is Required:
+- **After any file creation/modification**
+- **When git push fails with permission errors**
+- **When PowerShell scripts won't execute from WSL**
+- **After cloning/downloading the project**
+
+### Required CHMOD Commands:
+```bash
+# Fix all project permissions (ALWAYS RUN THIS FIRST)
+sudo chmod -R 755 /mnt/c/Users/MYCOM/Desktop/CheckComputer
+
+# Make all scripts executable
+sudo chmod +x /mnt/c/Users/MYCOM/Desktop/CheckComputer/*.ps1 
+sudo chmod +x /mnt/c/Users/MYCOM/Desktop/CheckComputer/categories/*/*.ps1
+
+# Fix git config if push fails
+sudo chmod 644 /mnt/c/Users/MYCOM/Desktop/CheckComputer/.git/config
+```
+
+### Signs You Need CHMOD:
+- **"Operation not permitted"** errors
+- **"Permission denied"** when running scripts
+- **Git push fails** with chmod errors on config.lock
+- **Scripts exist but won't execute** from WSL terminal
+
+### CHMOD in Anti-ClaudeBloat Protocol:
+- **ALWAYS chmod new files** before committing
+- **Fix permissions** as part of cleanup process
+- **Test execution** after chmod to verify fixes
+
 ## General Troubleshooting Patterns
 - **Boot/Startup Issues** → Check Event 7011 (service timeouts) + registry-audit for startup conflicts
 - **Startup Delays/Programs** → Always run registry startup analysis + registry-audit
