@@ -58,29 +58,29 @@ Stop-Service -Name "ServiceName" -Force; Set-Service -Name "ServiceName" -Startu
 
 ## Common Issues & Solutions
 
-### Black Screen at Startup
-- Check for **ArmouryCrateService** timeouts
-- Look for multiple Event 7011 entries
-- Banking/security software can cause delays
-- **NEW: Run registry-audit** to find startup conflicts
+### Boot/Startup Issues
+- **Event 7011 Pattern**: Service timeout issues causing delays
+- **Registry conflicts**: Multiple security/banking software conflicts
+- **Service analysis**: Check which services are hanging during boot
+- **Combined approach**: Event logs + registry startup audit
 
-### Slow Performance
-- Run: `MegaManager.ps1 performance memory`
-- Check for processes over 1GB RAM
-- Look for vmmem.exe (WSL memory issue)
-- **NEW: Check registry** for startup bloatware
+### Performance Problems
+- **Memory analysis**: Check for resource-heavy processes
+- **Startup bloatware**: Registry audit reveals auto-starting programs
+- **WSL memory issues**: Look for vmmem.exe consuming resources
+- **Process correlation**: Match high memory usage to startup entries
 
-### Suspicious Activity
-- Run: `MegaManager.ps1 security comprehensive`
-- **NEW: Run registry-audit** for comprehensive analysis
-- Check Event IDs: 4625, 4720, 7045, 4698
-- Review startup registry entries
+### Security/Malware Concerns
+- **Multi-layer approach**: Comprehensive scan + registry audit + event monitoring
+- **Persistence detection**: Registry startup locations + scheduled tasks
+- **Event correlation**: Match suspicious activities with Event IDs (4625, 4720, 7045, 4698)
+- **System modifications**: Check for shell/winlogon changes
 
-### Registry Issues (NEW)
-- **Startup delays**: Use `registry-audit` to find bloatware
-- **Unknown programs**: Check startup entries analysis
-- **System instability**: Look for orphaned registry keys
-- **Security concerns**: Analyze shell/winlogon modifications
+### Registry-Specific Issues
+- **Startup conflicts**: Banking/security software causing delays
+- **Orphaned entries**: Software leaving traces after uninstall
+- **System modifications**: Unauthorized changes to critical settings
+- **Performance impact**: Too many startup programs degrading boot time
 
 ## Important Notes
 - **Always use absolute paths** (C:\Users\MYCOM\Desktop\CheckComputer\)
@@ -88,12 +88,13 @@ Stop-Service -Name "ServiceName" -Force; Set-Service -Name "ServiceName" -Startu
 - **Run as Administrator** when needed
 - **Check project README.md** for full documentation
 
-## Success Patterns
-- When user says "computer stayed black" → Check Event 7011 + registry-audit
-- When user says "something at startup" → Check registry startup + registry-audit
-- When user says "acting strange" → Run dangerous-events scan + registry-audit
-- When user mentions specific time → Filter events to that timeframe
-- **NEW: Registry issues** → Always run registry-audit for comprehensive analysis
+## General Troubleshooting Patterns
+- **Boot/Startup Issues** → Check Event 7011 (service timeouts) + registry-audit for startup conflicts
+- **Startup Delays/Programs** → Always run registry startup analysis + registry-audit
+- **System Instability/Strange Behavior** → Run dangerous-events scan + comprehensive registry audit
+- **Time-Specific Issues** → Filter events to exact timeframe when problem occurred
+- **Unknown Programs/Performance** → Registry audit reveals startup bloatware and system modifications
+- **Security Concerns** → Combined approach: event logs + registry analysis + process scanning
 
 ## Project Philosophy
 This toolkit is designed to:

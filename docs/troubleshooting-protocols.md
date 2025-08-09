@@ -217,3 +217,48 @@ This protocol should be followed for any "computer acting strange" scenarios.
 - **Random crashes** → Look for orphaned driver entries
 - **Performance issues** → Investigate startup program overload
 - **Security concerns** → Focus on shell/winlogon modifications
+
+## Anti-ClaudeBloat Protocol (CRITICAL)
+
+### What is ClaudeBloatWare?
+**ClaudeBloatWare** = Scripts created during development/testing that are left in the project:
+- Broken versions of working scripts
+- Test scripts that served their purpose
+- Duplicate/redundant implementations
+- Generated reports or temporary files
+
+### ClaudeBloat Detection:
+#### **Red Flags:**
+- Multiple versions of same script (`script.ps1`, `script-v2.ps1`, `script-fixed.ps1`)
+- Scripts with "test", "simple", "broken" in the name
+- Scripts that don't integrate with MegaManager
+- Generated report files in project root
+- Abandoned development attempts
+
+#### **Examples Removed:**
+- `comprehensive-registry-audit.ps1` (broken encoding)
+- `comprehensive-registry-audit-v2.ps1` (broken encoding) 
+- `registry-audit-simple.ps1` (test script)
+- `registry-audit-2025-08-09-1150.txt` (generated report)
+
+### Anti-ClaudeBloat Rules:
+1. **ONE WORKING SCRIPT PER FEATURE** - No duplicates
+2. **DELETE BROKEN ATTEMPTS** - Don't leave failed scripts
+3. **CLEAN UP TEST FILES** - Remove after testing complete
+4. **INTEGRATE OR DELETE** - Scripts must work with MegaManager or be removed
+5. **NO GENERATED FILES IN REPO** - Reports go to user folders, not git
+
+### Cleanup Commands:
+```bash
+# Find potential bloatware
+find . -name "*-v2*" -o -name "*-simple*" -o -name "*-test*" -o -name "*-broken*"
+
+# Remove after verification
+rm [bloatware-files]
+```
+
+### Prevention:
+- **Commit working version ONLY** after testing
+- **Delete test/broken scripts** before committing
+- **Use clear naming** - avoid version suffixes in final scripts
+- **Test integration** before considering complete
