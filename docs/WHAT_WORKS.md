@@ -1,8 +1,9 @@
-# What Actually Works - Final Summary
+# What Actually Works - Final Summary (v2.1)
 
 ## The Main Tool: MegaManager.ps1
 
-**NEW: Master controller for all 15 security tools, organized by categories**
+**Master controller for all 18 tools, organized by categories**
+**v2.1: Added drive management + universal adaptable tools**
 
 ### Quick Start:
 ```powershell
@@ -36,11 +37,56 @@
 .\MegaManager.ps1 performance vmmem           # WSL memory check
 ```
 
-### Utility Tools (2 total):
+### Utility Tools (5 total - NEW v2.1!):
 ```powershell
 .\MegaManager.ps1 utilities test-admin        # Test admin privileges
 .\MegaManager.ps1 utilities security-mgr      # Simple security manager
+.\MegaManager.ps1 utilities check-drive       # NEW: Check what's using drive
+.\MegaManager.ps1 utilities check-drive-ties  # NEW: Find hidden locks
+.\MegaManager.ps1 utilities release-drive     # NEW: Release all locks
 ```
+
+## NEW v2.1: Universal Drive Tools
+
+### Standalone Universal Drive Checker
+**Works for ANY drive (C, D, E, F, etc.)**
+
+```powershell
+# Check any drive
+.\check-any-drive.ps1 -DriveLetter D    # Check D:
+.\check-any-drive.ps1 -DriveLetter E    # Check E:
+.\check-any-drive.ps1 -DriveLetter C    # Check C:
+
+# Show hidden Windows locks
+.\check-any-drive.ps1 -DriveLetter D -ShowLocks
+
+# Release ALL locks (before formatting)
+.\check-any-drive.ps1 -DriveLetter D -Release
+```
+
+**What it checks:**
+- ✅ Processes running FROM the drive
+- ✅ Services installed ON the drive
+- ✅ Scheduled tasks USING the drive
+- ✅ Loaded DLLs/modules FROM the drive
+- ✅ Drive space usage
+- ✅ Windows Search indexing (with -ShowLocks)
+- ✅ BitLocker encryption status (with -ShowLocks)
+- ✅ Shadow Copies/VSS snapshots (with -ShowLocks)
+- ✅ Recycle Bin contents (with -ShowLocks)
+- ✅ System Restore points (with -ShowLocks)
+
+### WSL-Windows Integration (MEGA POWER!)
+**See `docs/WSL-WINDOWS-INTEGRATION.md` for complete guide**
+
+The magic command pattern:
+```bash
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe \
+  -NoProfile -ExecutionPolicy Bypass \
+  -File "C:\Path\To\Script.ps1"
+```
+
+This opens ALL possibilities for cross-platform tools!
 
 ## Legacy Tool: SecurityManager.ps1
 

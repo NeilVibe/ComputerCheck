@@ -64,16 +64,23 @@ CLASSES:
   security     - Security scanning and analysis tools
   performance  - Memory and performance monitoring
   monitoring   - Event log and system monitoring
-  utilities    - Helper tools and basic functions
+  utilities    - Helper tools and basic functions (NEW: D drive management!)
   test         - Test all tools are working
   list         - List all available tools
-  
+
 EXAMPLES:
   .\MegaManager.ps1 security comprehensive
   .\MegaManager.ps1 performance memory
   .\MegaManager.ps1 monitoring events
+  .\MegaManager.ps1 utilities check-drive
+  .\MegaManager.ps1 utilities release-drive
   .\MegaManager.ps1 test
   .\MegaManager.ps1 list
+
+NEW D DRIVE TOOLS:
+  .\MegaManager.ps1 utilities check-drive       # Check what's using D drive
+  .\MegaManager.ps1 utilities check-drive-ties  # Find hidden locks
+  .\MegaManager.ps1 utilities release-drive     # Release all locks
 
 "@ -ForegroundColor White
     }
@@ -197,25 +204,61 @@ EXAMPLES:
     
     "utilities" {
         Write-Host "`nUTILITIES CLASS" -ForegroundColor Magenta
-        
+
         if ($List) {
             Write-Host "Available utility tools:" -ForegroundColor Yellow
-            Write-Host "  test-admin    - Test admin privileges"
-            Write-Host "  security-mgr  - Simple security manager"
+            Write-Host "  test-admin       - Test admin privileges"
+            Write-Host "  security-mgr     - Simple security manager"
+            Write-Host "  check-drive      - Check what's using a drive (D: by default)"
+            Write-Host "  check-drive-ties - Find hidden Windows locks on drive"
+            Write-Host "  release-drive    - Release all Windows locks on drive"
             return
         }
-        
+
         switch ($Tool.ToLower()) {
-            "test-admin" { 
+            "test-admin" {
                 Run-CategoryScript "utilities" "test-admin.ps1" $Action
             }
-            "security-mgr" { 
+            "security-mgr" {
                 Run-CategoryScript "utilities" "SecurityManager.ps1" $Action
+            }
+            "check-drive" {
+                $scriptPath = "$ScriptPath\check-d-drive.ps1"
+                if (Test-Path $scriptPath) {
+                    Write-Host "`n🚀 Checking Drive Usage" -ForegroundColor Yellow
+                    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Gray
+                    & $scriptPath
+                    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Gray
+                } else {
+                    Write-Host "❌ Script not found: $scriptPath" -ForegroundColor Red
+                }
+            }
+            "check-drive-ties" {
+                $scriptPath = "$ScriptPath\check-d-drive-hidden-ties.ps1"
+                if (Test-Path $scriptPath) {
+                    Write-Host "`n🚀 Checking Hidden Drive Locks" -ForegroundColor Yellow
+                    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Gray
+                    & $scriptPath
+                    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Gray
+                } else {
+                    Write-Host "❌ Script not found: $scriptPath" -ForegroundColor Red
+                }
+            }
+            "release-drive" {
+                $scriptPath = "$ScriptPath\release-d-drive.ps1"
+                if (Test-Path $scriptPath) {
+                    Write-Host "`n🚀 Releasing Drive Locks" -ForegroundColor Yellow
+                    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Gray
+                    & $scriptPath
+                    Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Gray
+                } else {
+                    Write-Host "❌ Script not found: $scriptPath" -ForegroundColor Red
+                }
             }
             "" {
                 Write-Host "Available utility tools:" -ForegroundColor Yellow
-                Write-Host "  test-admin, security-mgr"
-                Write-Host "Example: .\MegaManager.ps1 utilities test-admin"
+                Write-Host "  test-admin, security-mgr, check-drive, check-drive-ties, release-drive"
+                Write-Host "Example: .\MegaManager.ps1 utilities check-drive"
             }
             default {
                 Write-Host "Unknown utility tool: $Tool" -ForegroundColor Red

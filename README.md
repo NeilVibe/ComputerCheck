@@ -26,7 +26,53 @@ This project provides comprehensive tools for checking your computer's overall h
 
 ## How to Use
 
-### 🚀 NEW: Comprehensive Registry Analyzer (Latest Addition)
+### 🚨 CRITICAL FINDING: WSL Ubuntu Space Usage
+
+**Your WSL Ubuntu on E: drive is using 405GB - 43% of your drive!**
+
+Located at: `E:\Ubuntu\UbuntuWSL\ext4.vhdx`
+
+**Analysis Tools (READ-ONLY, SAFE):**
+```bash
+# Analyze what's inside your WSL (read-only)
+./analyze-wsl-contents.sh
+
+# Check overall E: drive space usage
+./space-sniffer.sh /mnt/e
+```
+
+**This is your LIFE's data - all tools are analysis-only, NO modifications!**
+
+---
+
+### 🚀 D Drive Management Tools
+
+**Complete disk management suite** - check what's using your drives, find hidden locks, and safely prepare for formatting!
+
+#### Check Drive Usage:
+```bash
+# From WSL/Linux Terminal:
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\MYCOM\Desktop\CheckComputer\check-d-drive.ps1"
+
+# Check hidden Windows ties (indexing, restore points, BitLocker):
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\MYCOM\Desktop\CheckComputer\check-d-drive-hidden-ties.ps1"
+
+# Release all locks before formatting:
+/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\Users\MYCOM\Desktop\CheckComputer\release-d-drive.ps1"
+```
+
+**What it checks:**
+- ✅ Processes running from the drive
+- ✅ Services installed on the drive
+- ✅ Scheduled tasks using the drive
+- ✅ Loaded DLLs/modules from the drive
+- ✅ Windows Search indexing
+- ✅ System Restore points
+- ✅ BitLocker encryption status
+- ✅ Recycle Bin contents
+- ✅ Shadow copies (VSS snapshots)
+
+### 🚀 Comprehensive Registry Analyzer
 
 **Full registry health audit and analysis tool** - detect startup bloatware, security issues, and system problems!
 
@@ -107,7 +153,12 @@ The checkup will provide:
 ## Additional Resources
 
 - **INSTALL.md**: Quick installation guide
-- **USAGE_GUIDE.md**: Detailed usage instructions  
+- **USAGE_GUIDE.md**: Detailed usage instructions
+- **CLAUDE.md**: AI Assistant quick reference with WSL command patterns
+- **docs/WSL-WINDOWS-INTEGRATION.md**: Complete WSL-Windows integration guide (MEGA POWER!)
+- **docs/POWERSHELL-ADMIN-GUIDE.md**: 🔥 Complete PowerShell admin rights & registry manipulation guide
+- **docs/WINDOWS11-CONTEXT-MENU-FIX.md**: 🎯 **NEW!** Restore Windows 10 right-click menu in Windows 11
+- **docs/SSH-WSL-TROUBLESHOOTING.md**: SSH to WSL troubleshooting and port forwarding
 - **FINAL_PROJECT_STATUS.md**: Complete project overview
 - **computer_security_report.md**: Historical security incident documentation
 - **docs/**: Detailed documentation and lessons learned
@@ -142,5 +193,6 @@ sudo chmod 644 /mnt/c/Users/MYCOM/Desktop/CheckComputer/.git/config
 
 ---
 
-*Computer Health Checkup Tool - Last updated: January 2025*  
-**🆕 Latest Addition: Comprehensive Registry Analyzer - Full system registry health audit** 
+*Computer Health Checkup Tool - Last updated: January 24, 2025*
+**🆕 Latest Addition: D Drive Management Tools + WSL-Windows Integration Guide (MEGA POWER!)**
+**Previous Addition: Comprehensive Registry Analyzer - Full system registry health audit** 

@@ -10,7 +10,8 @@ PYTHON_CMD="python3"
 
 # Function to get Explorer.exe handles (Windows-specific)
 get_explorer_handles() {
-    $POWERSHELL_CMD -NoProfile -Command "Get-Process explorer -ErrorAction SilentlyContinue | Select-Object -ExpandProperty Handles" 2>/dev/null || echo "0"
+    # Get the FIRST explorer.exe process (main UI process) handles
+    $POWERSHELL_CMD -NoProfile -Command "Get-Process explorer -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Handles" 2>/dev/null | tr -d '\n\r ' || echo "0"
 }
 
 # Function to get system memory percentage (cross-platform via psutil)
@@ -149,11 +150,11 @@ quick_check() {
         warnings+=("Explorer.exe handles elevated: $explorer_handles")
     fi
 
-    # Check memory
-    if (( $(echo "$memory_percent > 90" | bc -l) )); then
+    # Check memory (using Python for float comparison - no bc needed!)
+    if $PYTHON_CMD -c "exit(0 if $memory_percent > 90 else 1)"; then
         status="critical"
         errors+=("Memory usage critical: ${memory_percent}%")
-    elif (( $(echo "$memory_percent > 75" | bc -l) )); then
+    elif $PYTHON_CMD -c "exit(0 if $memory_percent > 75 else 1)"; then
         if [[ "$status" != "critical" ]]; then
             status="warning"
         fi
