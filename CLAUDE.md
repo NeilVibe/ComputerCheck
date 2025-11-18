@@ -73,8 +73,8 @@ This is a Windows security and troubleshooting toolkit designed to diagnose and 
 **SSH brute force attacks blocked - 32,783+ attack attempts detected and stopped!**
 - **Problem:** Password authentication enabled, under active brute force attack
 - **Root Cause:** SSH exposed to internet with password auth allowing unlimited guessing
-- **Solution:** Password auth disabled, fail2ban installed, key-only authentication enforced
-- **Status:** ✅ SECURED - Attacker IPs auto-banned, only SSH keys accepted
+- **Solution:** Password auth disabled, key-only authentication enforced
+- **Status:** ✅ SECURED - All password attempts rejected instantly, only SSH keys accepted
 
 **📖 Complete Guide:** See **SSH-FULLY-SECURED-2025-11-16.md** for full details
 
@@ -82,12 +82,13 @@ This is a Windows security and troubleshooting toolkit designed to diagnose and 
 ```bash
 # Check SSH security status
 sudo ./check-ssh-security.sh
-
-# Or quick check
-sudo fail2ban-client status sshd
 ```
 
-**What is fail2ban?** See **FAIL2BAN-EXPLAINED.md** - It's the standard Linux security tool (everyone uses it!)
+**About fail2ban:** ⚠️ DISABLED - Doesn't work with WSL SSH (sees wrong IPs)
+- See **FAIL2BAN-WSL-LIMITATION.md** for complete explanation
+- WSL port forwarding makes fail2ban see internal IPs (172.28.x.x), not real attackers
+- NOT NEEDED: Password auth is OFF = no brute force possible!
+- **Current security: MAXIMUM** (key-only authentication)
 
 ### 🚨 CRITICAL FINDING - WSL Ubuntu Space Usage
 **Your WSL Ubuntu installation on E: drive is consuming 405GB (43% of drive capacity)**

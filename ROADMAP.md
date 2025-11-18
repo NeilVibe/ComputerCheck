@@ -210,15 +210,21 @@
 
 **Currently Installed (Minimal - Keep It This Way!):**
 - ✅ Built-in Ubuntu tools (ps, grep, awk, netstat, df, etc.) - USE THESE FIRST!
-- ❌ **fail2ban** - ABANDONED (only sees WSL internal IP 172.28.x.x, can't track real attackers, password auth disabled makes it unnecessary)
+- ✅ **jq** (1.6) - JSON parser (ESSENTIAL for AI automation!)
+- ✅ **htop** - Better task manager (way better than top!)
+- ✅ **ncdu** - Disk usage browser (perfect for WSL analysis!)
+- ✅ **psutil** (Python 7.1.3) - System monitoring library
+- ❌ **fail2ban** - DISABLED (WSL limitation: only sees internal bridge IPs 172.28.x.x, not real attacker IPs)
+  - See **FAIL2BAN-WSL-LIMITATION.md** for complete technical explanation
+  - NOT NEEDED: Password auth is OFF = no brute force possible anyway!
 
 **Recommended Packages (Lightweight & Proven):**
 Install ONLY when specific need identified:
 
-**Essential (Highly Recommended):**
-- 🔲 **jq** (~1MB) - JSON parser for log analysis (ESSENTIAL for scripting!)
-- 🔲 **htop** (~200KB) - Better task manager (daily use, way better than top)
-- 🔲 **ncdu** (~100KB) - Disk browser (perfect for WSL space analysis!)
+**Essential (Already Installed!):**
+- ✅ **jq** (1.6) - JSON parser for log analysis (ESSENTIAL for scripting!)
+- ✅ **htop** - Better task manager (daily use, way better than top)
+- ✅ **ncdu** - Disk browser (perfect for WSL space analysis!)
 
 **Network Monitoring:**
 - 🔲 **iftop** (~100KB) - Real-time bandwidth per connection
@@ -234,7 +240,7 @@ Install ONLY when specific need identified:
 - 🔲 **logwatch** (~2MB) - Daily log summaries
 
 **Python Packages (pip3):**
-- 🔲 **psutil** - System monitoring in Python scripts
+- ✅ **psutil** (7.1.3) - System monitoring in Python scripts (INSTALLED!)
 - 🔲 **speedtest-cli** - Network speed testing
 
 **AVOID (Bloat/Overkill):**
@@ -598,4 +604,4 @@ Categories:
 
 ---
 
-*Last Updated: 2025-11-18 - Added package requirements and testing strategy*
+*Last Updated: 2025-11-18 - Package requirements validated, fail2ban WSL limitation documented, TIER 1 infrastructure complete*
