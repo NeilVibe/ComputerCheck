@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Project root directory
-PROJECT_ROOT="/mnt/c/Users/MYCOM/Desktop/CheckComputer"
+PROJECT_ROOT="/home/neil1988/CheckComputer"
 CATEGORIES_DIR="$PROJECT_ROOT/categories"
 
 # Colors for output (when not JSON)

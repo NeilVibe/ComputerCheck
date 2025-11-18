@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Project configuration
-PROJECT_ROOT="/mnt/c/Users/MYCOM/Desktop/CheckComputer"
+PROJECT_ROOT="/home/neil1988/CheckComputer"
 CATEGORIES_DIR="$PROJECT_ROOT/categories"
 POWERSHELL_CMD="/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
 
