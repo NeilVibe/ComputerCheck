@@ -99,15 +99,18 @@
 #### 5. **Essential Packages** ✅ INSTALLED!
 **All famous packages ready for AI automation:**
 - ✅ **jq** (1.6) - JSON parser (ESSENTIAL!)
-- ✅ **htop** - Task manager
-- ✅ **ncdu** - Disk browser
+- ✅ **htop** (3.0.5) - Task manager
+- ✅ **ncdu** (1.15.1) - Disk browser
 - ✅ **psutil** (7.1.3) - Python system monitoring
+- ✅ **nethogs** (0.8.6) - Bandwidth per app monitoring
+- ✅ **iftop** (1.0~pre4) - Live network traffic monitor
+- ✅ **nmap** (7.80) - Industry standard security scanner
 
 **TIER 1 STATUS: ✅ 100% COMPLETE - Ready for TIER 2!**
 
 ---
 
-## 🎯 CURRENT STATUS (2025-11-18)
+## 🎯 CURRENT STATUS (2025-11-20)
 
 ### ✅ What's Working Right Now
 
@@ -115,7 +118,7 @@
 - ✅ tools.sh - Discovers 17 tools across 4 categories
 - ✅ run.sh - Unified runner for all tools
 - ✅ check.sh - Health monitoring (<5 sec, JSON output)
-- ✅ Famous packages: jq, htop, ncdu, psutil (all installed)
+- ✅ Famous packages: jq, htop, ncdu, psutil, nethogs, iftop, nmap (all installed)
 
 **Documentation:**
 - ✅ 52+ guides (CLAUDE.md, ROADMAP.md, FRESH-START-ROADMAP.md)
@@ -123,11 +126,12 @@
 - ✅ SSH security clarified (key-only auth, no password brute force possible)
 - ✅ Migration to Linux filesystem complete and validated
 
-**System Health:**
-- ✅ Explorer.exe handles: 1,879 (healthy, well below 3,500 warning)
-- ✅ UI freeze fixed (bloatware removed, handles dropped 37%)
-- ✅ SSH secured (password auth OFF, 32,783+ attacks blocked)
-- ✅ Memory usage: 12.5% (excellent)
+**System Health (2025-11-20):**
+- ✅ Explorer.exe handles: 1,121-3,089 (excellent, well below 5,000 danger zone)
+- ✅ UI freeze fixed (bloatware removed, handles dropped 77% from peak)
+- ✅ SSH secured (password auth OFF, attacks ongoing but 100% blocked)
+- ✅ Memory usage: 11.3% (29.1% total = 18.6GB / 64GB used)
+- ✅ Under active brute force (218 attempts/hour, all blocked instantly)
 
 **Git Repository:**
 - ✅ Location: `/home/neil1988/CheckComputer` (native Linux filesystem)
@@ -710,4 +714,46 @@ Categories:
 
 ---
 
-*Last Updated: 2025-11-18 23:59 - TIER 1 COMPLETE! Migration validated, infrastructure ready, moving to TIER 2*
+## 📝 SESSION SUMMARY (2025-11-20)
+
+### What We Accomplished Today
+
+**Famous Monitoring Trio Installed:**
+- ✅ **nethogs** (0.8.6) - Per-app bandwidth monitoring (~50KB)
+- ✅ **iftop** (1.0~pre4) - Live network traffic monitor (~100KB)
+- ✅ **nmap** (7.80) - Industry standard security scanner (~5.7MB)
+- ✅ Total space: 26.3MB (includes dependencies)
+
+**System Health Validation:**
+- ✅ Comprehensive health check performed
+- ✅ Explorer.exe handles: 1,121-3,089 (77% improvement from freeze peak)
+- ✅ Memory usage: 11.3% WSL, 29.1% Windows (18.6GB / 64GB total)
+- ✅ CPU usage: 2.7% (idle/normal)
+- ✅ Bloatware still disabled (no services crept back)
+- ✅ No critical errors in last 2 hours
+
+**Security Status:**
+- ✅ SSH under active brute force attack (218 attempts/hour)
+- ✅ ALL attacks blocked instantly (password auth disabled since Nov 17)
+- ✅ Key-only authentication working perfectly
+- ✅ Zero successful unauthorized logins
+- ✅ Last password breach attempt: Nov 16, 23:08:10 (before security hardening)
+
+**Infrastructure Status:**
+- ✅ All TIER 1 tools operational (tools.sh, run.sh, check.sh)
+- ✅ All famous packages installed and ready (7 packages total)
+- ✅ Monitoring toolkit complete (built-in + famous tools)
+- ✅ Ready for TIER 2 development (monitor.sh, Monitor.ps1)
+
+### Attack Analysis
+**Usernames Attackers Tried (Last Hour):**
+- zhy, yangpan, notify, db2srnd, bobi, zanwy, www-admin, web, test, teamspeak3, tania, suporte, solr, simpel, sanboen, ftproot, rohit, ftp, ansibleadmin, student3, root
+
+**Security Effectiveness:** 100% - Not a single attack succeeded since password auth disabled.
+
+### What's Next (TIER 2)
+Same as before - ready to build modular monitoring infrastructure when needed.
+
+---
+
+*Last Updated: 2025-11-20 00:53 - Famous packages installed, system health excellent, SSH security confirmed working (attacks blocked)*
