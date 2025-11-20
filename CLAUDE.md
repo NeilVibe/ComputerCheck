@@ -90,6 +90,41 @@ sudo ./check-ssh-security.sh
 - NOT NEEDED: Password auth is OFF = no brute force possible!
 - **Current security: MAXIMUM** (key-only authentication)
 
+### 📅 MAINTENANCE SCHEDULES (NEW!)
+**Clear, actionable daily/weekly/monthly checklists to keep your system healthy**
+
+**Why this matters:**
+- Bloatware can re-enable itself (Windows Updates!)
+- Explorer handles can creep up over time
+- Regular checks prevent big problems
+
+**Your Maintenance Guides:**
+- **MAINTENANCE-SCHEDULE.md** - Complete guide with all daily/weekly/monthly checks
+- **WEEKLY-CHECKLIST.md** - Quick printable checklist (5 minutes every Sunday)
+
+**Quick Daily Check (30 seconds):**
+```bash
+cd ~/CheckComputer && ./check.sh --quick --json | jq '.status'
+# Expected: "healthy"
+```
+
+**Quick Weekly Check (5 minutes every Sunday):**
+```bash
+# 1. Health check
+./check.sh --quick --json | jq '.status'
+
+# 2. Explorer handles (should be 1,000-2,500)
+powershell.exe -NoProfile -Command "Get-Process explorer | Select-Object -First 1 Handles"
+
+# 3. Bloatware status (all should be Stopped/Disabled)
+powershell.exe -NoProfile -Command "Get-Service -Name 'ArmouryCrateService','LightingService','ROG Live Service' -ErrorAction SilentlyContinue | Select-Object Name, Status, StartType"
+
+# 4. SSH security
+sudo ./check-ssh-security.sh
+```
+
+**See MAINTENANCE-SCHEDULE.md for complete details!**
+
 ### 🚨 CRITICAL FINDING - WSL Ubuntu Space Usage
 **Your WSL Ubuntu installation on E: drive is consuming 405GB (43% of drive capacity)**
 - Location: `E:\Ubuntu\UbuntuWSL\ext4.vhdx`
