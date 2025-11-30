@@ -110,33 +110,47 @@
 
 ---
 
-## 🎯 CURRENT STATUS (2025-11-20)
+## 🎯 CURRENT STATUS (2025-11-30)
 
 ### ✅ What's Working Right Now
 
-**Infrastructure (TIER 1 Complete):**
+**Infrastructure (TIER 1 Complete + Disk Management):**
 - ✅ tools.sh - Discovers 17 tools across 4 categories
 - ✅ run.sh - Unified runner for all tools
 - ✅ check.sh - Health monitoring (<5 sec, JSON output)
 - ✅ Famous packages: jq, htop, ncdu, psutil, nethogs, iftop, nmap (all installed)
+- ✅ Disk analysis tools (space-sniffer.sh, analyze-wsl-contents.sh)
+- ✅ WSL-Windows bridge strategy documented (cross-system access)
+- ✅ **DISK CLEANUP PHASE 1 COMPLETE** - 53GB freed! (2025-11-30)
 
-**Documentation:**
-- ✅ 52+ guides (CLAUDE.md, ROADMAP.md, FRESH-START-ROADMAP.md)
-- ✅ fail2ban WSL limitation documented
-- ✅ SSH security clarified (key-only auth, no password brute force possible)
-- ✅ Migration to Linux filesystem complete and validated
+**Documentation (Reorganized 2025-11-30):**
+- ✅ **5 core docs in root** (CLAUDE.md HUB, README, ROADMAP, INSTALL, USAGE_GUIDE)
+- ✅ **31 reference docs in docs/** (organized by category)
+- ✅ **24 archived docs** (old sessions, superseded content)
+- ✅ CLAUDE.md rewritten as concise HUB (665 → 158 lines, 75% smaller!)
 
-**System Health (2025-11-20):**
-- ✅ Explorer.exe handles: 1,121-3,089 (excellent, well below 5,000 danger zone)
-- ✅ UI freeze fixed (bloatware removed, handles dropped 77% from peak)
+**System Health (2025-11-24):**
+- ⚠️ Explorer.exe handles: 1,121 min, **2,913 max** (handle leak detected!)
+- ⚠️ **SearchHost causing handle leaks** - Windows Search auto-restarts, causes accumulation
+- ✅ UI currently responsive (below critical 5,000 threshold)
 - ✅ SSH secured (password auth OFF, attacks ongoing but 100% blocked)
-- ✅ Memory usage: 11.3% (29.1% total = 18.6GB / 64GB used)
-- ✅ Under active brute force (218 attempts/hour, all blocked instantly)
+- ✅ Memory usage: 11.6% WSL (very healthy)
+- ✅ CPU usage: 1.3% (low and stable)
+- ✅ Disk: 367GB / 1TB WSL (38.4% used)
+
+**Disk Space Cleanup (Updated 2025-11-30):**
+- ✅ **TOTAL FREED: 127GB!**
+- ✅ E: Drive: ~470GB used (was 597GB) - 21% reduction
+- ✅ WSL Ubuntu: ~280GB (was 405GB)
+- ✅ Phase 1: Caches (53GB) - pip, puppeteer, duplicate conda
+- ✅ Phase 2: Ghost backup (34GB) - April 2020, safe to delete
+- ✅ Phase 3: Conda envs (40GB) - test1, fintest, esrgan, video_editor
+- ⏳ **OPTIONAL: ~18GB available** (ML caches if not using Fooocus)
 
 **Git Repository:**
 - ✅ Location: `/home/neil1988/CheckComputer` (native Linux filesystem)
 - ✅ Remote: git@github.com:NeilVibe/ComputerCheck.git (SSH)
-- ✅ Latest: c00138f (fail2ban documentation)
+- ✅ Latest: 8174e1c (maintenance schedules + infrastructure docs)
 - ✅ Clean working tree, fully synced
 
 ### 🚀 What's Next: TIER 2
@@ -756,4 +770,181 @@ Same as before - ready to build modular monitoring infrastructure when needed.
 
 ---
 
-*Last Updated: 2025-11-20 00:53 - Famous packages installed, system health excellent, SSH security confirmed working (attacks blocked)*
+## 📝 SESSION SUMMARY (2025-11-21)
+
+### What We Accomplished Today
+
+**Disk Space Infrastructure (NEW TIER 2 Feature!):**
+- ✅ Complete WSL Ubuntu disk analysis (405GB investigated)
+- ✅ Identified **85-150GB** cleanup potential across 5 categories
+- ✅ Created DISK-CLEANUP-FINDINGS.md (comprehensive cleanup documentation)
+- ✅ Created WSL-WINDOWS-BRIDGE-STRATEGY.md (cross-system access architecture)
+- ✅ Analyzed all major space consumers:
+  - pip cache: 35GB (safe to clear)
+  - Duplicate conda: 16GB on E: drive (safe to delete)
+  - Ghost backups: 34GB (old Norton Ghost images)
+  - ML model caches: 18GB (can redownload)
+  - Unused conda envs: 35GB+ (test1, fintest, esrgan, video_editor)
+- ✅ Documented E:/DOWLOAD issue (shows "Infinity" - junction/symlink loop)
+- ✅ Designed PowerShell bridge strategy for Windows-specific folders
+
+**Infrastructure Health Check:**
+- ✅ System status: HEALTHY (handles: 1,121, memory: 14.4%, CPU: 6.4%)
+- ✅ All infrastructure tools operational (check.sh <5 sec, JSON output working)
+- ✅ Bloatware still disabled (77% handle reduction maintained)
+
+**New Infrastructure Components:**
+1. **Disk Analysis Tools** - READ-ONLY analysis of WSL and Windows drives
+2. **Bridge Strategy** - Architecture for accessing Windows-specific features from WSL
+3. **Cleanup Documentation** - Phased, safe cleanup approach (no blind deletion)
+
+**Key Findings:**
+- **Safe cleanup available:** ~85GB (pip cache + duplicates + old backups)
+- **User decision needed:** ~40GB (unused conda environments)
+- **Manual audit needed:** ~20GB (Fooocus AI models)
+- **Total potential:** **~150GB** recoverable space
+
+**Next Steps:**
+1. User confirms which conda environments to keep (newfin_env confirmed active)
+2. Create safe cleanup scripts (phase 1: caches, phase 2: duplicates, phase 3: conda envs)
+3. Implement windows-bridge.ps1 tool for E:/DOWLOAD investigation
+4. Execute cleanup in phases with user approval at each step
+
+### Infrastructure Improvements (Tier 2 Progress)
+
+**Disk Management System (NEW!):**
+- ✅ Space analysis tools (space-sniffer.sh, analyze-wsl-contents.sh)
+- ✅ WSL-Windows bridge architecture designed
+- 🔲 Safe cleanup scripts (phase 1-4)
+- 🔲 windows-bridge.ps1 implementation
+- 🔲 Automated disk monitoring (weekly checks)
+
+**Design Philosophy:**
+- **Analyze first, delete never** - Complete investigation before any cleanup
+- **User approval required** - No automatic deletion, ever
+- **Phased approach** - Start with safest cleanups, progress to user decisions
+- **Reversible actions** - Document what was deleted, how to recover if needed
+- **Bridge strategy** - Handle WSL limitations with PowerShell when needed
+
+---
+
+## 📝 SESSION SUMMARY (2025-11-24)
+
+### What We Accomplished Today
+
+**Alert Lag Investigation:**
+- ✅ Discovered SearchHost causing ongoing handle leaks
+- ✅ Confirmed pattern: SearchHost running → explorer.exe handles accumulate
+- ✅ Tested fix: Killed SearchHost → handles dropped 60-75% immediately
+- ✅ Identified root cause: Windows auto-restarts SearchHost (system component)
+- ✅ Found growing leak: PID 18696 at 2,913 handles and climbing
+
+**Evidence Gathered:**
+- Before: PID 17840 at **3,715 handles** (3.3x normal - WARNING level)
+- After killing SearchHost: All processes 1,121-1,203 handles (HEALTHY)
+- After Windows restart: PID 18696 back to **2,913 handles** (+86 in 3 minutes)
+- Pattern confirmed: SearchHost = handle leak source
+
+**Documentation Created:**
+- ✅ **SEARCHHOST-EXPLORER-HANDLE-LEAK.md** - Complete issue documentation
+  - Root cause analysis
+  - Handle thresholds (Normal/Warning/Critical)
+  - Quick fixes vs permanent solutions
+  - Monitoring strategy
+  - Decision guide (disable vs weekly maintenance)
+- ✅ Updated ROADMAP.md with current findings
+
+**Current Status:**
+- System: MODERATE RISK - handles below critical but growing
+- Options: Disable Windows Search OR weekly maintenance approach
+- Decision: User to choose based on Start Menu search usage
+
+**Next Steps:**
+1. User decides: Disable Windows Search service OR accept weekly maintenance
+2. If disabling: Run PowerShell script to stop WSearch service permanently
+3. If keeping: Add explorer.exe handle check to weekly checklist
+4. Monitor for 1 week, reassess if needed
+
+---
+
+---
+
+## 📝 SESSION SUMMARY (2025-11-30)
+
+### What We Accomplished Today
+
+**DISK CLEANUP COMPLETE - 127GB FREED!**
+
+**Phase 1 - Caches (53GB):**
+| Item | Size | Status |
+|------|------|--------|
+| ~/.cache/pip | 35GB | ✅ DELETED |
+| ~/.cache/puppeteer | 1.8GB | ✅ DELETED |
+| /mnt/e/minicondaaa | 16GB | ✅ DELETED |
+
+**Phase 2 - Old Backup (34GB):**
+| Item | Size | Status |
+|------|------|--------|
+| /mnt/e/Ghost (April 2020 backup) | 34GB | ✅ DELETED |
+
+**Phase 3 - Unused Conda Envs (40GB):**
+| Item | Size | Status |
+|------|------|--------|
+| test1 | 11GB | ✅ DELETED |
+| video_editor_env | 5.1GB | ✅ DELETED |
+| fintest | 8.2GB | ✅ DELETED |
+| esrgan_env | 16GB | ✅ DELETED |
+
+**Remaining Conda Envs (Kept):**
+- fooocus (8.3GB) - Stable Diffusion
+- newfin_env (8.8GB) - Active development env
+- fetch_env (396MB) - Small utility
+- ytdl_env (240MB) - YouTube downloader
+
+**Total Space Freed: ~127GB**
+
+---
+
+**DOCUMENTATION REORGANIZATION COMPLETE!**
+
+**Before:** 60 markdown files scattered everywhere
+**After:** Clean, organized structure
+
+**Structure:**
+```
+Root (5 core docs):
+├── CLAUDE.md      # HUB (reduced from 665 → 158 lines!)
+├── README.md      # Project intro
+├── ROADMAP.md     # This file
+├── INSTALL.md     # Setup
+└── USAGE_GUIDE.md # Usage
+
+docs/ (31 reference docs):
+├── System health guides
+├── Security docs
+├── WSL/Windows integration
+└── Troubleshooting guides
+
+archive/ (24 old docs):
+├── docs/          # Superseded documentation
+├── old-reports/   # Historical reports
+└── scripts/       # Archived scripts
+```
+
+**Key Changes:**
+- CLAUDE.md rewritten as concise HUB (75% smaller!)
+- 24 obsolete/redundant docs moved to archive
+- 15 reference docs moved to docs/
+- Clean project root with only 5 essential docs
+
+---
+
+### Current System Status
+- E: Drive: ~470GB used (was 597GB) - **127GB freed!**
+- WSL Ubuntu: ~280GB (was 405GB)
+- Improvement: **21% reduction** in E: drive usage
+- Remaining cleanup potential: ~18GB (ML caches, optional)
+
+---
+
+*Last Updated: 2025-11-30 - Major cleanup session: 127GB disk freed, docs reorganized, CLAUDE.md rewritten as HUB*
