@@ -110,7 +110,7 @@
 
 ---
 
-## 🎯 CURRENT STATUS (2025-11-30)
+## 🎯 CURRENT STATUS (2025-12-06)
 
 ### ✅ What's Working Right Now
 
@@ -121,7 +121,7 @@
 - ✅ Famous packages: jq, htop, ncdu, psutil, nethogs, iftop, nmap (all installed)
 - ✅ Disk analysis tools (space-sniffer.sh, analyze-wsl-contents.sh)
 - ✅ WSL-Windows bridge strategy documented (cross-system access)
-- ✅ **DISK CLEANUP PHASE 1 COMPLETE** - 53GB freed! (2025-11-30)
+- ✅ **TOTAL DISK CLEANUP: 208GB freed!** (127GB Nov-30 + 81GB Dec-06)
 
 **Documentation (Reorganized 2025-11-30):**
 - ✅ **5 core docs in root** (CLAUDE.md HUB, README, ROADMAP, INSTALL, USAGE_GUIDE)
@@ -129,23 +129,19 @@
 - ✅ **24 archived docs** (old sessions, superseded content)
 - ✅ CLAUDE.md rewritten as concise HUB (665 → 158 lines, 75% smaller!)
 
-**System Health (2025-11-24):**
-- ⚠️ Explorer.exe handles: 1,121 min, **2,913 max** (handle leak detected!)
-- ⚠️ **SearchHost causing handle leaks** - Windows Search auto-restarts, causes accumulation
-- ✅ UI currently responsive (below critical 5,000 threshold)
-- ✅ SSH secured (password auth OFF, attacks ongoing but 100% blocked)
-- ✅ Memory usage: 11.6% WSL (very healthy)
-- ✅ CPU usage: 1.3% (low and stable)
-- ✅ Disk: 367GB / 1TB WSL (38.4% used)
+**System Health (2025-12-06):**
+- ✅ SSH secured (password auth OFF, attacks 100% blocked)
+- ✅ WSL Disk: 231GB / 1TB (23% used) - **81GB freed today!**
+- ✅ E: Drive: Clean, movies kept, Ubuntu WSL active
+- ✅ Conda: 20GB (cache cleared, 4 envs kept)
+- ✅ Huggingface: 893MB (only KR-SBERT kept)
 
-**Disk Space Cleanup (Updated 2025-11-30):**
-- ✅ **TOTAL FREED: 127GB!**
-- ✅ E: Drive: ~470GB used (was 597GB) - 21% reduction
-- ✅ WSL Ubuntu: ~280GB (was 405GB)
-- ✅ Phase 1: Caches (53GB) - pip, puppeteer, duplicate conda
-- ✅ Phase 2: Ghost backup (34GB) - April 2020, safe to delete
-- ✅ Phase 3: Conda envs (40GB) - test1, fintest, esrgan, video_editor
-- ⏳ **OPTIONAL: ~18GB available** (ML caches if not using Fooocus)
+**Disk Space Cleanup (Updated 2025-12-06):**
+- ✅ **TOTAL FREED: 208GB!** (127GB + 81GB)
+- ✅ WSL Ubuntu: 231GB used (was 312GB today, 405GB originally)
+- ✅ Phase 1 (Nov-30): 127GB - pip cache, Ghost backup, old conda envs
+- ✅ Phase 2 (Dec-06): 81GB - conda pkgs, HF models, torch, logs
+- ✅ Kept: KR-SBERT model, 4 active conda envs, electron/playwright
 
 **Git Repository:**
 - ✅ Location: `/home/neil1988/CheckComputer` (native Linux filesystem)
@@ -866,6 +862,40 @@ Same as before - ready to build modular monitoring infrastructure when needed.
 4. Monitor for 1 week, reassess if needed
 
 ---
+
+---
+
+## 📝 SESSION SUMMARY (2025-12-06)
+
+### What We Accomplished Today
+
+**WSL DEEP CLEANUP - 81GB FREED!**
+
+**Cleanup Performed:**
+| Item | Size | Status |
+|------|------|--------|
+| Conda package cache | 55 GB | ✅ DELETED (`conda clean --all`) |
+| Huggingface models (unused) | 15 GB | ✅ DELETED (kept KR-SBERT only) |
+| CUDA .deb installer | 2.6 GB | ✅ DELETED (from 2022) |
+| Torch cache | 2.3 GB | ✅ DELETED |
+| System logs | 3.7 GB | ✅ VACUUMED |
+| APT cache | 794 MB | ✅ CLEANED |
+
+**Before/After:**
+- WSL Used: 312 GB → 231 GB (**81 GB freed!**)
+- miniconda3: 76 GB → 20 GB (conda cache cleared)
+- huggingface: 16 GB → 893 MB (kept only KR-SBERT)
+
+**Documentation Updates:**
+- ✅ CLAUDE.md rewritten as **Tree Hub Style**
+- ✅ Visual tree structures for project, tools, docs, roadmap
+- ✅ Quick navigation for Claude AI
+- ✅ Disk cleanup history table added
+
+**Current WSL Status:**
+- Used: 231 GB (23%)
+- Free: 726 GB
+- Total cleanup to date: **208 GB freed!**
 
 ---
 
