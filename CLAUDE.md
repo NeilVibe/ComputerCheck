@@ -1,203 +1,179 @@
-# CLAUDE.md - Project Tree Hub
+# CLAUDE.md - CheckComputer Navigation Hub
 
-```
- _______ ______ ______ ______   __  __ __  __ ____
-|__   __|  ____|  ____|  ____| |  \/  |  \/  |  _ \
-   | |  | |__  | |__  | |__    | \  / | \  / | |_) |
-   | |  |  __| |  __| |  __|   | |\/| | |\/| |  _ <
-   | |  | |    | |____| |____  | |  | | |  | | |_) |
-   |_|  |_|    |______|______| |_|  |_|_|  |_|____/
+**Version:** 2512161430 | **Status:** TIER 1 Complete | **Health:** WARNING (handles)
 
-   CheckComputer - AI-First Diagnostic Infrastructure
-```
+> **KEEP THIS FILE COMPACT.** Only essential info here. Details go in linked docs.
 
 ---
 
-## Quick Reference
+## Quick Navigation
 
-| Item | Value |
+| Need | Go To |
 |------|-------|
-| **Location** | `/home/neil1988/CheckComputer` |
-| **Windows** | `\\wsl$\Ubuntu\home\neil1988\CheckComputer` |
-| **Remote** | `git@github.com:NeilVibe/ComputerCheck.git` |
+| **Current task?** | [ROADMAP.md](ROADMAP.md) |
+| **Last session context?** | [docs/wip/SESSION_CONTEXT.md](docs/wip/SESSION_CONTEXT.md) |
+| **Known issues?** | [docs/wip/ISSUES_TO_FIX.md](docs/wip/ISSUES_TO_FIX.md) |
+| **Expansion priorities?** | [docs/PRIORITY-EXPANSION-LIST.md](docs/PRIORITY-EXPANSION-LIST.md) |
+| **All WIP docs?** | [docs/wip/README.md](docs/wip/README.md) |
 
 ---
 
-## Project Tree
+## Glossary
+
+| Term | Meaning |
+|------|---------|
+| **RM** | ROADMAP.md - global priorities |
+| **WIP** | docs/wip/*.md - active task files |
+| **TIER 1** | Infrastructure (tools.sh, run.sh, check.sh) - COMPLETE |
+| **TIER 2** | Automation (daily/weekly checks, cron) - PLANNED |
+| **TIER 3** | Advanced (reports, remediation) - FUTURE |
+| **Handles** | Explorer.exe handle count (>3500 = warning, >5000 = critical) |
+
+---
+
+## Architecture
+
+**Dual Platform: WSL Ubuntu + Windows PowerShell**
 
 ```
 CheckComputer/
+├── Shell Scripts (Linux)     PowerShell Scripts (Windows)
+│   ├── check.sh         ──→  ├── MegaManager.ps1
+│   ├── run.sh                ├── SecurityManager.ps1
+│   └── tools.sh              └── categories/*.ps1
 │
-├── CLAUDE.md ◄────────────── YOU ARE HERE (Hub)
-│
-├─── Core Docs
-│    ├── README.md             # Project intro
-│    ├── ROADMAP.md            # Dev roadmap + session logs
-│    ├── INSTALL.md            # Setup guide
-│    └── USAGE_GUIDE.md        # How to use
-│
-├─── Tools (Executable)
-│    ├── check.sh              # Quick health check
-│    ├── run.sh                # Unified tool runner
-│    ├── tools.sh              # Tool discovery
-│    ├── MegaManager.ps1       # Windows master controller
-│    └── SecurityManager.ps1   # Security tools
-│
-├─── categories/               # PowerShell modules
-│    ├── security/             # Registry audit, malware scan
-│    ├── performance/          # Memory, handles, startup
-│    ├── monitoring/           # Events, processes, USB
-│    └── utilities/            # Drive check, services
-│
-├─── docs/                     # Reference docs (31 files)
-│    ├── System Health         # UI freeze, handle leaks
-│    ├── Security              # SSH, fail2ban, hardening
-│    ├── Disk & Cleanup        # Space analysis, safe cleanup
-│    └── WSL Integration       # Cross-platform guides
-│
-└─── archive/                  # Old/superseded docs
+└── Cross-Platform Bridge
+    └── run.sh calls PowerShell via /mnt/c/Windows/.../powershell.exe
+```
+
+| Linux Tools | Windows Tools |
+|-------------|---------------|
+| Disk analysis (ncdu) | Registry audit |
+| Network (ss, nethogs) | Services, events |
+| SSH security | Explorer handles |
+| System stats (htop) | Process monitoring |
+
+---
+
+## Critical Rules
+
+### 1. No Bloat Policy
+```
+NEVER install packages "just in case"
+ONLY install when specific need identified
+DELETE unused tools
+```
+
+### 2. JSON Output for AI
+All tools should output JSON when possible for AI parsing.
+```bash
+./check.sh --quick --json | jq '.status'
+```
+
+### 3. Read-Only First
+Check and report before taking any action.
+```
+CHECK → REPORT → (user approves) → FIX
+```
+
+### 4. French System Warning
+Windows Event logs may be in French. Account for this in parsing.
+
+### 5. Admin Required
+Many PowerShell operations need elevation. Use `gsudo` or run as admin.
+
+---
+
+## Quick Commands
+
+```bash
+# Health check (< 5 sec)
+./check.sh --quick --json
+
+# List all tools
+./tools.sh --list
+
+# Run specific tool
+./run.sh security comprehensive
+./run.sh performance memory
+./run.sh monitoring dangerous-events
+
+# Check Explorer handles
+powershell.exe "Get-Process explorer | Select Handles"
+
+# Kill SearchHost (fix handle leak)
+powershell.exe "Stop-Process -Name 'SearchHost' -Force"
 ```
 
 ---
 
-## Tools Tree
+## Tool Categories
 
 ```
-Tool Infrastructure
-│
-├─── Health Checks
-│    ├── ./check.sh --quick --json    # Fast health (<5 sec)
-│    ├── ./check.sh --all             # Comprehensive
-│    └── ./tools.sh --list            # Discover all tools
-│
-├─── Windows Diagnostics (via run.sh)
-│    ├── security comprehensive       # Full security scan
-│    ├── security registry-audit      # Registry malware check
-│    ├── performance memory           # Memory analysis
-│    ├── performance handle-check     # Explorer handles
-│    ├── monitoring dangerous-events  # Critical Event IDs
-│    └── monitoring process-watch     # Suspicious processes
-│
-└─── Linux Tools
-     ├── htop                          # Process viewer
-     ├── ncdu                          # Disk analyzer
-     ├── nethogs                       # Per-app bandwidth
-     ├── iftop                         # Network traffic
-     └── nmap                          # Security scanner
+categories/
+├── security/      8 scripts (registry, malware, processes)
+├── monitoring/    5 scripts (events, USB, dangerous IDs)
+├── performance/   2 scripts (memory, vmmem)
+└── utilities/     3 scripts (WSL, admin, services)
 ```
+
+**Discovery:** `./tools.sh --list`
 
 ---
 
-## Documentation Tree
+## Key Thresholds
+
+| Metric | OK | Warning | Critical |
+|--------|-----|---------|----------|
+| Explorer handles | <3,500 | 3,500-5,000 | >5,000 |
+| Memory % | <75% | 75-90% | >90% |
+| Disk % | <80% | 80-90% | >90% |
+
+---
+
+## New Session Checklist
+
+1. **Read session context:** [docs/wip/SESSION_CONTEXT.md](docs/wip/SESSION_CONTEXT.md)
+2. **Quick health check:** `./check.sh --quick --json`
+3. **Check issues:** [docs/wip/ISSUES_TO_FIX.md](docs/wip/ISSUES_TO_FIX.md)
+4. **Check roadmap:** [ROADMAP.md](ROADMAP.md)
+5. **Ask user** what to work on
+
+---
+
+## Key Paths
+
+| Item | Path |
+|------|------|
+| **Project** | `/home/neil1988/CheckComputer` |
+| **Windows** | `\\wsl$\Ubuntu\home\neil1988\CheckComputer` |
+| **GitHub** | `git@github.com:NeilVibe/ComputerCheck.git` |
+
+---
+
+## Documentation Map
 
 ```
 docs/
-│
-├─── System Health
-│    ├── MASTER-GUIDE-UI-FREEZE-FIX.md      # Bloatware removal
-│    ├── SEARCHHOST-EXPLORER-HANDLE-LEAK.md # Handle leak fix
-│    ├── MAINTENANCE-SCHEDULE.md            # Daily/weekly checks
-│    └── WEEKLY-CHECKLIST.md                # Sunday routine
-│
-├─── Security
-│    ├── SSH-FULLY-SECURED-2025-11-16.md    # SSH hardening
-│    ├── FAIL2BAN-WSL-LIMITATION.md         # WSL limitation
-│    └── SECURITY-EXPANSION-PLAN.md         # Future plans
-│
-├─── Disk & Cleanup
-│    ├── DISK-CLEANUP-FINDINGS.md           # WSL analysis
-│    └── SAFE-CLEANUP-RANKED.md             # What's safe
-│
-└─── WSL/Windows
-     ├── WSL-WINDOWS-INTEGRATION.md         # Cross-platform
-     ├── POWERSHELL-ADMIN-GUIDE.md          # Admin ops
-     └── TERMINAL-COMMANDS-GUIDE.md         # Best practices
+├── wip/                      # Work in progress
+│   ├── SESSION_CONTEXT.md    # ← Claude memory handoff
+│   ├── ISSUES_TO_FIX.md      # ← Bug tracker
+│   └── README.md             # ← WIP index
+├── PRIORITY-EXPANSION-LIST.md # ← TIER 2 build order
+├── MAINTENANCE-SCHEDULE.md    # Daily/weekly routines
+├── SEARCHHOST-EXPLORER-HANDLE-LEAK.md  # Handle fix
+└── ... (31 reference docs)
 ```
 
 ---
 
-## Quick Commands Tree
+## Stats
 
-```
-Common Operations
-│
-├─── Health Check (5 min)
-│    ├── ./check.sh --quick --json | jq '.status'
-│    ├── powershell.exe "Get-Process explorer | Select Handles"
-│    └── sudo ./check-ssh-security.sh
-│
-├─── Windows Diagnostics
-│    ├── ./run.sh security comprehensive
-│    ├── ./run.sh performance memory
-│    └── ./run.sh monitoring dangerous-events
-│
-├─── Disk Space
-│    ├── df -h                              # Linux space
-│    ├── ncdu ~                             # Interactive browser
-│    └── conda clean --all -y               # Clear conda cache
-│
-└─── Git Operations
-     ├── git status
-     ├── git add . && git commit -m "msg"
-     └── git push
-```
+- **Tools:** 17 PowerShell + 10 Shell scripts
+- **Packages:** jq, htop, ncdu, psutil, nethogs, iftop, nmap
+- **Disk Freed:** 208 GB (cleanup Nov-Dec 2025)
+- **Docs:** 31 in docs/, 3 in wip/
 
 ---
 
-## Roadmap Tree
-
-```
-Development Status
-│
-├─── TIER 1: Infrastructure ✅ COMPLETE
-│    ├── tools.sh (discovery)      ✅
-│    ├── run.sh (unified runner)   ✅
-│    ├── check.sh (health)         ✅
-│    └── Famous packages           ✅ jq, htop, ncdu, nmap
-│
-├─── TIER 2: Core Features ⏳ IN PROGRESS
-│    ├── monitor.sh                🔲 Linux monitoring
-│    ├── Monitor.ps1               🔲 Windows monitoring
-│    ├── Automated checks          🔲 Cron jobs
-│    └── Dashboard                 🔲 Visual status
-│
-└─── TIER 3: Advanced 🔲 PLANNED
-     ├── Historical tracking       🔲
-     ├── Automated remediation     🔲
-     └── Report generation         🔲
-```
-
----
-
-## Key Event IDs
-
-| ID | Meaning |
-|----|---------|
-| 7011 | Service timeout |
-| 7045 | New service installed |
-| 4625 | Failed login (brute force) |
-| 6008 | Unexpected shutdown |
-
----
-
-## Important Notes
-
-- **French system** - Windows logs may be in French
-- **Run as Admin** - Many PowerShell ops need elevation
-- **chmod after creating** - Make scripts executable
-- **Password auth OFF** - SSH key-only (brute force blocked)
-
----
-
-## Disk Cleanup History
-
-| Date | Freed | Total |
-|------|-------|-------|
-| 2025-11-30 | 127 GB | pip, conda, Ghost backup |
-| 2025-12-06 | 81 GB | conda cache, HF models, logs |
-| **TOTAL** | **208 GB** | |
-
----
-
-*Last Updated: 2025-12-06*
-*Tree Hub Style - Quick navigation for Claude AI*
+*Last updated: 2025-12-16 | Hub file - details live in linked docs*
