@@ -1,23 +1,26 @@
 # Session Context - Claude Handoff Document
 
-**Updated:** 2025-12-19 15:30 KST | **Status:** HEALTHY | **Interop:** Fixed
+**Updated:** 2025-12-19 16:10 KST | **Status:** HEALTHY | **Systemd:** running
 
 ---
 
 ## TL;DR FOR NEXT SESSION
 
-**WSL boot reliability issues fixed!**
+**WSL boot reliability + system cleanup complete!**
 
 1. Fixed WSL startup task - now uses elegant `systemctl is-system-running --wait`
 2. Created systemd service to auto-fix interop if it breaks
-3. Documented everything in `docs/WSL-AUTOSTART-AND-INTEROP-FIX.md`
+3. Cleaned up orphaned certbot configs + broken nginx sites
+4. Documented in `docs/WSL-AUTOSTART-AND-INTEROP-FIX.md`
 
 **System Status:**
 ```
+Systemd:          running (all services OK)
 WSL Startup Task: OK (elegant systemd wait approach)
 WSL Interop:      OK (auto-fix service enabled)
-SSH Service:      Running (since boot)
-Systemd:          degraded (certbot failed - non-critical)
+SSH Service:      Running
+Certbot:          Disabled (no SSL projects active)
+Nginx:            Clean (broken sites removed)
 ```
 
 ---
@@ -35,7 +38,13 @@ Systemd:          degraded (certbot failed - non-critical)
 - **New:** `C:\Users\MYCOM\wsl-startup.cmd` calling `systemctl is-system-running --wait`
 - **Why better:** Waits until systemd fully initializes before exiting
 
-### 3. Documentation Created
+### 3. Certbot & Nginx Cleanup
+- **Problem:** Orphaned SSL renewal configs for `dashvolleyball.com` & `translateyourgame.com`
+- **Cause:** Certs deleted but configs left behind → certbot failing daily
+- **Fix:** Removed orphaned configs, disabled certbot timer, disabled broken nginx sites
+- **Result:** `systemctl is-system-running` now reports `running` (was `degraded`)
+
+### 4. Documentation Created
 - `docs/WSL-AUTOSTART-AND-INTEROP-FIX.md` - Full technical docs
 
 ---
@@ -54,9 +63,12 @@ Systemd:          degraded (certbot failed - non-critical)
 
 | Priority | Issue | Description |
 |----------|-------|-------------|
-| INFO | certbot.service | Failed (non-critical, no SSL certs needed) |
+| RESOLVED | certbot.service | Cleaned up orphaned configs, timer disabled |
+| RESOLVED | nginx sites | Disabled broken SSL sites (dashvolleyball, translateyourgame) |
 | RESOLVED | WSL interop | Fixed + auto-fix service installed |
 | RESOLVED | WSL startup | Task upgraded to elegant approach |
+
+**All clear!** No active issues.
 
 ---
 
@@ -114,4 +126,4 @@ powershell.exe "Get-Process explorer | Select Handles"
 
 ---
 
-*Last updated: 2025-12-19 15:30 KST - WSL boot reliability fixed*
+*Last updated: 2025-12-19 16:10 KST - WSL boot + certbot/nginx cleanup complete*
