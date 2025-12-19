@@ -1,54 +1,52 @@
 # Session Context - Claude Handoff Document
 
-**Updated:** 2025-12-16 14:30 KST | **Status:** HEALTHY | **Handles:** 4,003 (warning)
+**Updated:** 2025-12-19 15:30 KST | **Status:** HEALTHY | **Interop:** Fixed
 
 ---
 
 ## TL;DR FOR NEXT SESSION
 
-**Infrastructure expansion planning complete!**
+**WSL boot reliability issues fixed!**
 
-1. Created `docs/PRIORITY-EXPANSION-LIST.md` - Full roadmap for TIER 2
-2. Restructured docs to WIP/SESSION/RM pattern
-3. Explorer handles at 4,003 (warning zone - consider killing SearchHost)
+1. Fixed WSL startup task - now uses elegant `systemctl is-system-running --wait`
+2. Created systemd service to auto-fix interop if it breaks
+3. Documented everything in `docs/WSL-AUTOSTART-AND-INTEROP-FIX.md`
 
 **System Status:**
 ```
-RAM:      17.4 GB / 63.8 GB (27%) - OK
-CPU:      1.2% - Idle
-Handles:  4,003 - WARNING (>3500)
-Disk C:   48% used - OK
-Disk E:   44% used - OK
-WSL:      27% used (697 GB free) - OK
+WSL Startup Task: OK (elegant systemd wait approach)
+WSL Interop:      OK (auto-fix service enabled)
+SSH Service:      Running (since boot)
+Systemd:          degraded (certbot failed - non-critical)
 ```
 
 ---
 
 ## WHAT WAS ACCOMPLISHED THIS SESSION
 
-### 1. PC Resources Check
-- Full system health scan performed
-- RAM: 27% used (17.4/63.8 GB)
-- All disks healthy (<50% used)
-- Explorer handles elevated at 4,003 (SearchHost leak)
+### 1. WSL Interop Fixed (was broken)
+- **Symptom:** `cmd.exe` gave "Exec format error"
+- **Cause:** WSLInterop handler missing from binfmt_misc
+- **Fix:** Re-registered handler manually
+- **Prevention:** Created systemd service for auto-fix at boot
 
-### 2. Infrastructure Review
-- Confirmed TIER 1 complete (tools.sh, run.sh, check.sh)
-- 17 tools across 4 categories working
-- All famous packages installed (jq, htop, ncdu, psutil, nethogs, iftop, nmap)
+### 2. WSL Startup Task Upgraded
+- **Old:** `wsl.exe -d Ubuntu2 --exec /bin/true` (exits immediately, unreliable)
+- **New:** `C:\Users\MYCOM\wsl-startup.cmd` calling `systemctl is-system-running --wait`
+- **Why better:** Waits until systemd fully initializes before exiting
 
-### 3. Priority Expansion List Created
-- `docs/PRIORITY-EXPANSION-LIST.md` - Full expansion roadmap
-- P1 (HIGH): daily-check.sh, weekly-check.sh, cron automation
-- P2 (MEDIUM): snapshot.sh, historical metrics, status dashboard
-- P3 (LOW): Full monitor.sh, report generator
+### 3. Documentation Created
+- `docs/WSL-AUTOSTART-AND-INTEROP-FIX.md` - Full technical docs
 
-### 4. Documentation Restructured
-- Created `docs/wip/` folder (LocalizationTools pattern)
-- Added SESSION_CONTEXT.md (this file)
-- Added ISSUES_TO_FIX.md
-- Rewrote CLAUDE.md as compact HUB
-- Cleaned up ROADMAP.md
+---
+
+## FILES CREATED/MODIFIED
+
+| File | Location | Purpose |
+|------|----------|---------|
+| `wsl-startup.cmd` | `C:\Users\MYCOM\` | Startup script |
+| `wsl-interop-fix.service` | `/etc/systemd/system/` | Auto-fix interop |
+| `WSL-AUTOSTART-AND-INTEROP-FIX.md` | `docs/` | Documentation |
 
 ---
 
@@ -56,24 +54,48 @@ WSL:      27% used (697 GB free) - OK
 
 | Priority | Issue | Description |
 |----------|-------|-------------|
-| WARNING | Explorer handles | 4,003 handles (threshold: 3,500) |
-| INFO | SearchHost leak | Known issue, documented in docs/ |
+| INFO | certbot.service | Failed (non-critical, no SSL certs needed) |
+| RESOLVED | WSL interop | Fixed + auto-fix service installed |
+| RESOLVED | WSL startup | Task upgraded to elegant approach |
 
-**Quick Fix:**
-```powershell
-Stop-Process -Name "SearchHost" -Force
+---
+
+## VERIFICATION COMMANDS
+
+```bash
+# Check interop working
+cmd.exe /c echo "Interop works!"
+
+# Check startup task
+powershell.exe 'Get-ScheduledTask -TaskName "WSL-SSH-Startup" | Select TaskName, State'
+
+# Check interop auto-fix service
+systemctl is-enabled wsl-interop-fix.service
+
+# Check SSH
+systemctl status ssh
 ```
 
 ---
 
-## NEXT STEPS (TIER 2 BUILD ORDER)
+## NOTES FOR FUTURE
 
-1. **Week 1:** daily-check.sh + cron automation
-2. **Week 2:** weekly-check.sh + status.sh dashboard
-3. **Week 3:** snapshot.sh baseline system
-4. **Week 4:** Alerts + historical tracking
+### WSL Restart (No Native Command)
+There is **no `wsl --restart`**. Only:
+- `wsl --shutdown` (kills everything)
+- `wsl --terminate <distro>`
 
-See: [PRIORITY-EXPANSION-LIST.md](../PRIORITY-EXPANSION-LIST.md)
+To restart remotely, need Windows access (RDP/SSH to Windows) to run:
+```powershell
+wsl --shutdown
+wsl -d Ubuntu2
+```
+
+### gsudo Through WSL
+Complex PowerShell commands through gsudo get mangled. **Solution:** Write a `.ps1` script file, then run:
+```bash
+gsudo powershell -File "C:\path\to\script.ps1"
+```
 
 ---
 
@@ -83,31 +105,13 @@ See: [PRIORITY-EXPANSION-LIST.md](../PRIORITY-EXPANSION-LIST.md)
 # Health check
 ./check.sh --quick --json | jq '.status'
 
-# Run security scan
-./run.sh security comprehensive
-
-# List all tools
-./tools.sh --list
+# Fix interop manually (if needed)
+sudo sh -c 'echo ":WSLInterop:M::MZ::/init:PF" > /proc/sys/fs/binfmt_misc/register'
 
 # Check Explorer handles
 powershell.exe "Get-Process explorer | Select Handles"
-
-# Kill SearchHost (fix handle leak)
-powershell.exe "Stop-Process -Name 'SearchHost' -Force"
 ```
 
 ---
 
-## KEY PATHS
-
-| Item | Path |
-|------|------|
-| Project | `/home/neil1988/CheckComputer` |
-| Windows | `\\wsl$\Ubuntu\home\neil1988\CheckComputer` |
-| Categories | `categories/{security,performance,monitoring,utilities}` |
-| Docs | `docs/` (31 files) |
-| WIP | `docs/wip/` (active tasks) |
-
----
-
-*Last updated: 2025-12-16 14:30 KST - Infrastructure expansion planning complete*
+*Last updated: 2025-12-19 15:30 KST - WSL boot reliability fixed*
